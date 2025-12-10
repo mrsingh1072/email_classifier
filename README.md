@@ -37,16 +37,18 @@ An intelligent AI-powered email organization system with a stunning 3D solar sys
 
 ### Prerequisites
 
-- **Python 3.8+**
-- **Node.js 14+**
-- **MongoDB** (local or Atlas)
-- **Gmail Account** with IMAP enabled
+- **Python 3.10+**
+- **Node.js 16+** (with npm)
+- **Git**
+- *(Optional) Gmail Account with IMAP enabled for email sync*
+
+> **Note**: This project uses an in-memory mock database, so no MongoDB installation is required!
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/ujjwalpan001/email_classifier.git
+   git clone https://github.com/mrsingh1072/email_classifier.git
    cd email_classifier
    ```
 
@@ -59,11 +61,9 @@ An intelligent AI-powered email organization system with a stunning 3D solar sys
    pip install -r requirements.txt
    ```
 
-3. **Create Backend .env file**
+3. **Create Backend .env file** (Optional - uses defaults if not provided)
    ```bash
    # backend/.env
-   MONGODB_URL=mongodb://localhost:27017
-   DATABASE_NAME=email_classifier
    SECRET_KEY=your-super-secret-key-change-this
    ALGORITHM=HS256
    ACCESS_TOKEN_EXPIRE_MINUTES=30
@@ -75,7 +75,7 @@ An intelligent AI-powered email organization system with a stunning 3D solar sys
    npm install
    ```
 
-5. **Create Frontend .env file**
+5. **Create Frontend .env file** (Optional - uses localhost by default)
    ```bash
    # frontend/.env
    REACT_APP_API_URL=http://localhost:8000
@@ -83,29 +83,44 @@ An intelligent AI-powered email organization system with a stunning 3D solar sys
 
 ### Running the Application
 
-1. **Start MongoDB**
-   ```bash
-   # Make sure MongoDB is running on localhost:27017
-   # Or use MongoDB Atlas connection string
-   ```
-
-2. **Start Backend Server**
+1. **Start Backend Server**
    ```bash
    cd backend
    venv\Scripts\activate
-   uvicorn main:app --reload --port 8000
+   python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
+   
+   Backend will be available at: `http://localhost:8000`
 
-3. **Start Frontend Development Server**
+2. **Start Frontend Development Server** (in a new terminal)
+   ```bash
+   cd frontend
+   npm start
+   ```
+   
+   Frontend will be available at: `http://localhost:3000`
    ```bash
    cd frontend
    npm start
    ```
 
-4. **Access the Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Docs: http://localhost:8000/docs
+3. **Access the Application**
+   - **Frontend**: http://localhost:3000
+   - **Backend API**: http://localhost:8000
+   - **API Documentation**: http://localhost:8000/docs (Swagger UI)
+   - **Interactive API Docs**: http://localhost:8000/redoc (ReDoc)
+
+### Quick Test
+
+After starting both servers, you can:
+
+1. Open `http://localhost:3000` in your browser
+2. **Sign up** with a new account, or **login** with test credentials:
+   - **Email**: `test@example.com`
+   - **Password**: `password123`
+3. Navigate to the dashboard and explore the application
+
+> **Note**: The app uses an in-memory mock database. User data will be reset when you restart the backend server.
 
 ## 📁 Project Structure
 
@@ -192,30 +207,34 @@ email_classifier/
 
 ## 🔧 Configuration
 
-### Gmail IMAP Setup
+### Database Information
 
-1. Enable IMAP in Gmail Settings:
-   - Go to Settings → See all settings → Forwarding and POP/IMAP
-   - Enable IMAP
-   - Save changes
+**Current Setup**: The application uses an **in-memory mock database** instead of MongoDB.
 
-2. Generate App Password:
-   - Go to https://myaccount.google.com/apppasswords
-   - Create a new app password for "Mail"
-   - Use this password in the IMAP setup (not your Gmail password)
+**Advantages**:
+- ✅ No database installation needed
+- ✅ Fast setup and testing
+- ✅ Perfect for development and demos
+- ⚠️ Data persists only during the session (resets on server restart)
+
+**Switching to MongoDB** (Optional):
+If you want to use a persistent database:
+
+1. Install MongoDB locally or use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+2. Update `backend/main.py` to use the original MongoDB implementation
+3. Set the `MONGODB_URL` in your `.env` file
+4. Restart the backend server
 
 ### Environment Variables
 
-**Backend (.env)**
+**Backend (.env)** - Optional (uses defaults if not provided)
 ```env
-MONGODB_URL=your_mongodb_connection_string
-DATABASE_NAME=email_classifier
-SECRET_KEY=generate_a_secure_random_key
+SECRET_KEY=your-super-secret-key-change-this
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-**Frontend (.env)**
+**Frontend (.env)** - Optional (defaults to localhost:8000)
 ```env
 REACT_APP_API_URL=http://localhost:8000
 ```
@@ -281,8 +300,9 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-**Ujjawal Pandey**
-- GitHub: [@ujjwalpan001](https://github.com/ujjwalpan001)
+**SAURABH KUMAR**
+- GitHub: [@mrsingh1072](https://github.com/mrsingh1072)
+- Repository: [email_classifier](https://github.com/mrsingh1072/email_classifier)
 
 ## 🙏 Acknowledgments
 
