@@ -89,11 +89,6 @@ An intelligent AI-powered email organization system with a stunning 3D solar sys
    venv\Scripts\activate
    python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
-   
-
-
-
-   
    Backend will be available at: `http://localhost:8000`
 
 2. **Start Frontend Development Server** (in a new terminal)
