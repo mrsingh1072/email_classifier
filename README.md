@@ -91,6 +91,10 @@ An intelligent AI-powered email organization system with a stunning 3D solar sys
    ```
    Backend will be available at: `http://localhost:8000`
 
+
+
+
+
 2. **Start Frontend Development Server** (in a new terminal)
    ```bash
    cd frontend
